@@ -5,6 +5,12 @@ namespace Client
 {
     public partial class Form1 : Form
     {
+        // Webview 2 is essentially a full,
+        // running instance of the Chromium engine
+        // (the technology behind the Microsoft Edge browser)
+        // without the typical browser window.
+        // Allows me to push chromium engine inside the rtxt,
+        // using modern code examples
         private WebView2 web;
 
         public Form1()
@@ -22,7 +28,7 @@ namespace Client
 
         private async void Form1_Load(object? sender, EventArgs e)
         {
-            // Microsoft Edge Engine
+            // Embed web content
             await web.EnsureCoreWebView2Async();
         }
 

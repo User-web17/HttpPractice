@@ -13,9 +13,17 @@ namespace Server
             Console.WriteLine("Server is running...");
 
             using var cts = new CancellationTokenSource();
-            Console.CancelKeyPress += (s, e) =>
+            //  Cosole.CancelKeyPress is a built-in event in .NET
+            //  that triggers when the user presses Ctrl+C or Ctrl+Break.
+            //  It allows us to intercept the cancellation signal so our application can finish saving data,
+            //  close database connections, or simply terminate the app instead of crashing
+            //  It passes ConsoleCancelEventArgs into the system,
+            //  allowing Main() to handle eventArgs[] via it's parameters
+            Console.CancelKeyPress += (sender, eventArgs) =>
             {
-                e.Cancel = true;
+                // Prevent immediate termination
+                eventArgs.Cancel = true;
+                // Set a cancellation token here
                 cts.Cancel();
             };
 
